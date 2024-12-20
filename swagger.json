@@ -1,0 +1,805 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "API REST Games Compilation",
+    "description": "Uma API REST que server como compliado de jogos e suas publisher tendo como storage Json"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/ola/{palavra}": {
+      "get": {
+        "summary": "Nascimento",
+        "description": "Teste de rota",
+        "parameters": [
+          {
+            "name": "palavra",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Ira mostrar na tela a palavra digitada"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foi tudo execultado sem percalço"
+          }
+        }
+      }
+    },
+    "/install/": {
+      "post": {
+        "summary": "Instalação da api",
+        "description": "Cadastro do primeiro Administrador caso não haja nenhum usuário cadastrado",
+        "parameters": [
+          {
+            "name": "login",
+            "description": "Nome do primeiro administrador",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "senha",
+            "description": "Senhao do primeiro Administrador",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "login": {
+                  "example": "any"
+                },
+                "senha": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foi tudo execultado sem percalço"
+          },
+          "410": {
+            "description": "A api já foi instalado no servidor"
+          }
+        }
+      }
+    },
+    "/game/": {
+      "get": {
+        "summary": "Listar jogos",
+        "description": "Listagem de todos os objetos no json",
+        "responses": {
+          "200": {
+            "description": "Foi tudo execultado sem percalço"
+          }
+        }
+      },
+      "post": {
+        "summary": "Inserir jogo",
+        "description": "Insere por concatenação o objeto jogo no json",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "nome",
+            "description": "Nome do jogo",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "ganero",
+            "description": "Gênero do jogo",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "publisher",
+            "description": "Publisher do jogo",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "example": "any"
+                },
+                "genero": {
+                  "example": "any"
+                },
+                "publisher": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foi tudo execultado sem percalço"
+          },
+          "498": {
+            "description": "Token não é valido ou expirado"
+          }
+        }
+      }
+    },
+    "/game/{nome}": {
+      "get": {
+        "summary": "Buscar pelo nome",
+        "description": "Retorna o primeiro objeto no json com o mesmo nome",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "string de busca"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foi tudo execultado sem percalço"
+          },
+          "404": {
+            "description": "inexistência do jogo no json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualizar jogo",
+        "description": "Atualiza o primeiro objeto no json com o mesmo nome",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Objeto a ser modificado"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "newnome",
+            "description": "O novo nome do objeto recebido pelo body",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "newgenero",
+            "description": "O novo gênero do objeto recebido pelo body ",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "newpublisher",
+            "description": "A nova publisher do objeto revebido pelo body",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "newnome": {
+                  "example": "any"
+                },
+                "newgenero": {
+                  "example": "any"
+                },
+                "newpublisher": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foi tudo execultado sem percalço"
+          },
+          "498": {
+            "description": "Token não é valido ou expirado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Excluir de um jogo",
+        "description": "Exclui o primeiro jogo encontrado com o nome que é passado por parametro na url ",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Nome do Objeto a ser excluido"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foi tudo execultado sem percalço"
+          },
+          "498": {
+            "description": "Token não é valido ou expirado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/game/genero/{genero}": {
+      "get": {
+        "summary": "Buscar por gênero",
+        "description": "Retorna todos os jogos com o gênero informado",
+        "parameters": [
+          {
+            "name": "genero",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "string de busca"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foi tudo execultado sem percalço"
+          },
+          "404": {
+            "description": "inexistência do gênero no json"
+          }
+        }
+      }
+    },
+    "/publisher/": {
+      "get": {
+        "summary": "Listar publisher",
+        "description": "Retorna uma lista com todos os objetos dentro do json",
+        "responses": {
+          "200": {
+            "description": "Foi tudo execultado sem percalço"
+          }
+        }
+      },
+      "post": {
+        "summary": "Inserir publisher",
+        "description": "Inserção de um objeto do tipo publisher por concatenação",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "nome",
+            "description": "nome da publisher recebido pelo body",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "pais",
+            "description": "país da publisher recebido pelo body",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "example": "any"
+                },
+                "pais": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foi tudo execultado sem percalço"
+          },
+          "498": {
+            "description": "Token não é valido ou expirado"
+          }
+        }
+      }
+    },
+    "/publisher/{nome}": {
+      "get": {
+        "summary": "Buscar por nome",
+        "description": "Retorna o primeiro objeto com o mesmo nome",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "string de busca"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foi tudo execultado sem percalço"
+          },
+          "404": {
+            "description": "Ausência de objeto com tal nome"
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualizar publisher",
+        "description": "Atuliza o priemrio objeto publisher no json com o mesmo nome",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Nome antigo da publisher"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "newnome",
+            "description": "Novo nome da publisher",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "newpais",
+            "description": "Novo país da publisher",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "newnome": {
+                  "example": "any"
+                },
+                "newpais": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foi tudo execultado sem percalço"
+          },
+          "498": {
+            "description": "Token não é valido ou expirado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Excluir publisher",
+        "description": "Exclui o primeiro objeto publisher no json com o mesmo nome",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "String de busca"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foi tudo execultado sem percalço"
+          },
+          "498": {
+            "description": "Token não é valido ou expirado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/publisher/jogos/{nome}": {
+      "get": {
+        "summary": "Buscar publisher por nome",
+        "description": "Listagem de todos os jogos lançados pela publisher",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Nome da publisher"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foi tudo execultado sem percalço"
+          },
+          "404": {
+            "description": "Ausência de objeto relacionado ao nome da publisher"
+          }
+        }
+      }
+    },
+    "/usuario/adm": {
+      "post": {
+        "summary": "Inserir administradores",
+        "description": "Rota exclusiva para administradores para criarem outros sdministradores",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "login",
+            "description": "Nome do usuário",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "senha",
+            "description": "Senha do usuário",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "login": {
+                  "example": "any"
+                },
+                "senha": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foi tudo execultado sem percalço"
+          },
+          "401": {
+            "description": "O usuario não tem acesso de administrador "
+          },
+          "498": {
+            "description": "Token não é valido ou expirado"
+          }
+        }
+      }
+    },
+    "/usuario/user": {
+      "post": {
+        "summary": "Inserir usuário comum",
+        "description": "Rota exclusiva para administradores para criação de usuários commum, ",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "login",
+            "description": "Nome do usuário",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "senha",
+            "description": "Senha do usuário",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "login": {
+                  "example": "any"
+                },
+                "senha": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foi tudo execultado sem percalço"
+          },
+          "401": {
+            "description": "O usuario não tem acesso de administrador "
+          },
+          "498": {
+            "description": "Token não é valido ou expirado"
+          }
+        }
+      }
+    },
+    "/usuario/login": {
+      "post": {
+        "summary": "Efetuar login",
+        "description": "Verifica se o login e senha inseridos está de acordo com algum objeto usuário e se sim gera um token",
+        "parameters": [
+          {
+            "name": "login",
+            "description": "Nome do usuário",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "senha",
+            "description": "Senha do usuário",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "login": {
+                  "example": "any"
+                },
+                "senha": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foi tudo execultado sem percalço"
+          },
+          "403": {
+            "description": "As credenciais não reflete nenhum objeto usuário cadastrado"
+          }
+        }
+      }
+    },
+    "/usuario/": {
+      "get": {
+        "summary": "Listar usuários",
+        "description": "Lista todos os objetos usuário no json",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foi tudo execultado sem percalço"
+          },
+          "403": {
+            "description": "Token não é valido ou expirado"
+          },
+          "498": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/usuario/adm/update/": {
+      "put": {
+        "summary": "Atualizar usuários",
+        "description": "Rota exclusiva para administradores para atualizar dados os usuários",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "oldlogin",
+            "description": "Nome do usuário que será substituido",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "oldsenha",
+            "description": "Senha do usuário que será substituido",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "newlogin",
+            "description": "Novo nome do usuário",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "newsenha",
+            "description": "Nova senha do usuário",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "oldlogin": {
+                  "example": "any"
+                },
+                "oldsenha": {
+                  "example": "any"
+                },
+                "newlogin": {
+                  "example": "any"
+                },
+                "newsenha": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foi tudo execultado sem percalço"
+          },
+          "401": {
+            "description": "O usuario não tem acesso de administrador "
+          },
+          "498": {
+            "description": "Token não é valido ou expirado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/usuario/user/update": {
+      "put": {
+        "summary": "Atualizar usuário logado",
+        "description": "Atualiza os dados do usuario logado",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "newlogin",
+            "description": "Novo nome do usuário",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "newsenha",
+            "description": "Nova senha do usuário",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "newlogin": {
+                  "example": "any"
+                },
+                "newsenha": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foi tudo execultado sem percalço"
+          },
+          "498": {
+            "description": "Token não é valido ou expirado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/usuario/adm/deletar/{login}/{senha}": {
+      "delete": {
+        "summary": "Excluir usuário",
+        "description": "Rota exclusiva para administradores para excluir um usuário",
+        "parameters": [
+          {
+            "name": "login",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Nome do usuário a ser deletado"
+          },
+          {
+            "name": "senha",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Senha do usuário a ser deletado"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foi tudo execultado sem percalço"
+          },
+          "401": {
+            "description": "O usuario não tem acesso de administrador"
+          },
+          "498": {
+            "description": "Token não é valido ou expirado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    }
+  }
+}
